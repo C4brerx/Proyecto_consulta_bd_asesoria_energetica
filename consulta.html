@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Asesoría Energética</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Consulta Asesoría Energética</h1>
+        <form id="searchForm">
+            <div class="form-row">
+                <div class="col-md-3 mb-3">
+                    <label for="cif">CIF:</label>
+                    <input type="text" class="form-control" id="cif">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" class="form-control" id="nombre">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="comercializadora">Comercializadora:</label>
+                    <input type="text" class="form-control" id="comercializadora">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="estado">Estado:</label>
+                    <input type="text" class="form-control" id="estado">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+        <div class="table-responsive mt-4">
+            <table class="table" id="resultsTable">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>CIF</th>
+                        <th>Nombre</th>
+                        <th>CUPS</th>
+                        <th>Tarifa</th>
+                        <th>Comercializadora</th>
+                        <th>Comercial</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                        <th>Fecha</th>
+                        <th>Pagado</th>
+                        <th>O 50%</th>
+                        <th>Documentos Adjuntos</th>
+                        <th>Fecha de Acabar Contrato</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se mostrarán los resultados -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Obtener las fechas de los contratos
+            const fechasContratos = allData.map(item => item.FECHA);
+    
+            // Configurar el contexto del gráfico
+            const ctx = document.getElementById('myChart').getContext('2d');
+    
+            // Configurar el gráfico de línea
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: fechasContratos, // Fechas de los contratos
+                    datasets: [{
+                        label: 'Fechas de Contratos',
+                        data: fechasContratos, // Fechas de los contratos
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'time', // Usar escalas de tiempo para el eje X
+                            time: {
+                                displayFormats: {
+                                    month: 'MMM YYYY' // Formato de visualización de las fechas
+                                }
+                            }
+                        }]
+                    }
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
